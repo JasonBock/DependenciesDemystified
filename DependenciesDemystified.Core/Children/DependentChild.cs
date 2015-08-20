@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DependenciesDemystified.Core.Parents;
+using System;
 
-namespace DependenciesDemystified.Core
+namespace DependenciesDemystified.Core.Children
 {
 	public sealed class DependentChild
+		: IChild
 	{
 		private readonly IParent parent;
 

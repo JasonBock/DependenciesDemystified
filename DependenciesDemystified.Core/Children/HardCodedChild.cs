@@ -1,6 +1,9 @@
-﻿namespace DependenciesDemystified.Core
+﻿using DependenciesDemystified.Core.Parents;
+
+namespace DependenciesDemystified.Core.Children
 {
-	public sealed class HardCodedChild
+	public sealed class HardCodedChild 
+		: IChild
 	{
 		public void DemandFunds()
 		{

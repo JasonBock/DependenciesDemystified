@@ -32,6 +32,10 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Spackle, Version=7.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Spackle.7.1.0.0\lib\NET4.0\Spackle.dll</HintPath>
       <Private>True</Private>
@@ -46,12 +50,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DependentChild.cs" />
-    <Compile Include="HardCodedChild.cs" />
-    <Compile Include="IParent.cs" />
-    <Compile Include="JasonAsParent.cs" />
-    <Compile Include="LizAsParent.cs" />
+    <Compile Include="Children\ComplexDependentChild.cs" />
+    <Compile Include="Children\DependentChild.cs" />
+    <Compile Include="Children\HardCodedChild.cs" />
+    <Compile Include="Children\IChild.cs" />
+    <Compile Include="CoreModule.cs" />
+    <Compile Include="Parents\IParent.cs" />
+    <Compile Include="Parents\JasonAsParent.cs" />
+    <Compile Include="Parents\LizAsParent.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="Products\XboxOneProduct.cs" />
+    <Compile Include="Products\IProduct.cs" />
+    <Compile Include="Products\ProductChoices.cs" />
+    <Compile Include="Products\SurfaceProduct.cs" />
+    <Compile Include="Products\TeslaProduct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleContainer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

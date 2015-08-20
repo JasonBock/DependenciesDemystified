@@ -1,4 +1,4 @@
-﻿namespace DependenciesDemystified.Core
+﻿namespace DependenciesDemystified.Core.Parents
 {
 	public interface IParent
 	{

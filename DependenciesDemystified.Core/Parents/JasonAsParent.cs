@@ -1,18 +1,18 @@
 ﻿using Spackle;
 using System;
 
-namespace DependenciesDemystified.Core
+namespace DependenciesDemystified.Core.Parents
 {
-	public sealed class LizAsParent
+	public sealed class JasonAsParent
 		: IParent
 	{
 		private readonly SecureRandom random = new SecureRandom();
 
 		public decimal ProduceFunds()
 		{
-			if (this.random.Next(0, 10) == 0)
+			if (this.random.Next(0, 2) == 0)
 			{
-				return 100M;
+				return 1000M;
 			}
 			else
 			{
