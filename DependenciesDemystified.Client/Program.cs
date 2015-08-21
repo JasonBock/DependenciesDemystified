@@ -80,14 +80,17 @@ namespace DependenciesDemystified.Client
 
 			var container = builder.Build();
 
-			var child = container.Resolve<IChild>();
-
-			for (var i = 0; i < 1000; i++)
+			using (var scope = container.BeginLifetimeScope())
 			{
-				child.DemandFunds();
-			}
+				var child = scope.Resolve<IChild>();
 
-			Console.Out.WriteLine(child.Wallet);
+				for (var i = 0; i < 100; i++)
+				{
+					child.DemandFunds();
+				}
+
+				Console.Out.WriteLine(child.Wallet);
+			}
 		}
 	}
 }

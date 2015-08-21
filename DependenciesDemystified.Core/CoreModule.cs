@@ -16,7 +16,7 @@ namespace DependenciesDemystified.Core
 		{
 			base.Load(builder);
 
-			builder.RegisterType<Logger>().As<ILogger>().SingleInstance();
+			builder.RegisterType<Logger>().As<ILogger>().InstancePerLifetimeScope();
 			builder.RegisterType<SecureRandom>().As<Random>().SingleInstance();
 			builder.Register<Func<ProductChoices, IProduct>>(c =>
 			{
