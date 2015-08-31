@@ -1,5 +1,4 @@
 ﻿using Spackle;
-using System;
 
 namespace DependenciesDemystified.Core.Parents
 {
@@ -19,5 +18,7 @@ namespace DependenciesDemystified.Core.Parents
 				return 0M;
 			}
 		}
+
+		public string Name { get { return "Jason"; } }
 	}
 }

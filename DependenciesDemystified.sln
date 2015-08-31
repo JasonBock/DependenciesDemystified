@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependenciesDemystified.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependenciesDemystified.Client", "DependenciesDemystified.Client\DependenciesDemystified.Client.csproj", "{DE8741AA-A8E4-4B55-BB63-6A470BC44E9F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependenciesDemystified.WebApi", "DependenciesDemystified.WebApi\DependenciesDemystified.WebApi.csproj", "{A14D68DE-7D2B-4703-84BC-14E87BE31E7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DE8741AA-A8E4-4B55-BB63-6A470BC44E9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE8741AA-A8E4-4B55-BB63-6A470BC44E9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE8741AA-A8E4-4B55-BB63-6A470BC44E9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14D68DE-7D2B-4703-84BC-14E87BE31E7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14D68DE-7D2B-4703-84BC-14E87BE31E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14D68DE-7D2B-4703-84BC-14E87BE31E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14D68DE-7D2B-4703-84BC-14E87BE31E7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

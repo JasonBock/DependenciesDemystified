@@ -18,5 +18,7 @@ namespace DependenciesDemystified.Core.Parents
 				return 0M;
 			}
 		}
+
+		public string Name { get { return "Liz"; } }
 	}
 }

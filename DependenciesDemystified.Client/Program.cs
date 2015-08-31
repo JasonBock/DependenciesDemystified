@@ -59,9 +59,9 @@ namespace DependenciesDemystified.Client
 
 			var container = new SimpleContainer();
 			container.Register<IParent>(c => new JasonAsParent());
-			container.Register<DependentChild>(c => new DependentChild(c.Resolve<IParent>()));
+			container.Register<IChild>(c => new DependentChild(c.Resolve<IParent>()));
 
-			var child = container.Resolve<DependentChild>();
+			var child = container.Resolve<IChild>();
 
 			for (var i = 0; i < 1000; i++)
 			{
