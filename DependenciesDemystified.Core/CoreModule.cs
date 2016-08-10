@@ -16,7 +16,7 @@ namespace DependenciesDemystified.Core
 		{
 			base.Load(builder);
 
-			builder.RegisterType<Logger>().As<ILogger>().InstancePerLifetimeScope();
+			builder.RegisterType<Logger>().As<ILogger>();
 			builder.RegisterType<SecureRandom>().As<Random>().SingleInstance();
 			builder.Register<Func<ProductChoices, IProduct>>(c =>
 			{
@@ -41,7 +41,7 @@ namespace DependenciesDemystified.Core
 
 				if (random.Next(0, 2) == 0)
 				{
-					return new LizAsParent();
+					return new LizAsParent(c.Resolve<Random>());
 				}
 				else
 				{

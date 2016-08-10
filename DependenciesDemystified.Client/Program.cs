@@ -1,7 +1,9 @@
 ﻿using Autofac;
+using Autofac.Configuration;
 using DependenciesDemystified.Core;
 using DependenciesDemystified.Core.Children;
 using DependenciesDemystified.Core.Parents;
+using Spackle;
 using System;
 
 namespace DependenciesDemystified.Client
@@ -22,12 +24,13 @@ namespace DependenciesDemystified.Client
 
 			var child = new HardCodedChild();
 
-			for(var i = 0; i < 1000; i++)
+			for (var i = 0; i < 1000; i++)
 			{
 				child.DemandFunds();
 			}
 
 			Console.Out.WriteLine(child.Wallet);
+			Console.Out.WriteLine(child.Parent.Name);
 		}
 
 		private static void RunDependentChild()
@@ -43,7 +46,7 @@ namespace DependenciesDemystified.Client
 
 			Console.Out.WriteLine($"{nameof(childUsesJason)} - {childUsesJason.Wallet}");
 
-			var childUsesLiz = new DependentChild(new LizAsParent());
+			var childUsesLiz = new DependentChild(new LizAsParent(new SecureRandom()));
 
 			for (var i = 0; i < 1000; i++)
 			{
@@ -77,6 +80,7 @@ namespace DependenciesDemystified.Client
 
 			var builder = new ContainerBuilder();
 			builder.RegisterModule<CoreModule>();
+			builder.RegisterModule(new ConfigurationSettingsReader());
 
 			var container = builder.Build();
 
@@ -90,6 +94,7 @@ namespace DependenciesDemystified.Client
 				}
 
 				Console.Out.WriteLine(child.Wallet);
+				Console.Out.WriteLine(child.Parent.Name);
 			}
 		}
 	}

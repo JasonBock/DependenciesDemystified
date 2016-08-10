@@ -5,12 +5,18 @@ namespace DependenciesDemystified.Core.Children
 	public sealed class HardCodedChild 
 		: IChild
 	{
+		public HardCodedChild()
+		{
+			this.Parent = new JasonAsParent();
+		}
+
 		public void DemandFunds()
 		{
-			var parent = new JasonAsParent();
-			this.Wallet += parent.ProduceFunds();
+			this.Wallet += this.Parent.ProduceFunds();
 		}
 
 		public decimal Wallet { get; private set; }
+
+		public IParent Parent { get; private set; }
 	}
 }

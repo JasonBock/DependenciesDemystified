@@ -1,11 +1,22 @@
 ﻿using Spackle;
+using System;
 
 namespace DependenciesDemystified.Core.Parents
 {
 	public sealed class LizAsParent
 		: IParent
 	{
-		private readonly SecureRandom random = new SecureRandom();
+		private readonly Random random;
+
+		public LizAsParent(Random random)
+		{
+			if(random == null)
+			{
+				throw new ArgumentNullException(nameof(random));
+			}
+
+			this.random = random;
+		}
 
 		public decimal ProduceFunds()
 		{
@@ -19,6 +30,6 @@ namespace DependenciesDemystified.Core.Parents
 			}
 		}
 
-		public string Name { get { return "Liz"; } }
+		public string Name => "Liz";
 	}
 }

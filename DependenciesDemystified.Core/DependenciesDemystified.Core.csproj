@@ -55,6 +55,7 @@
     <Compile Include="Children\HardCodedChild.cs" />
     <Compile Include="Children\IChild.cs" />
     <Compile Include="CoreModule.cs" />
+    <Compile Include="Parents\GrandParent.cs" />
     <Compile Include="Parents\IParent.cs" />
     <Compile Include="Parents\JasonAsParent.cs" />
     <Compile Include="Parents\LizAsParent.cs" />

@@ -66,5 +66,7 @@ namespace DependenciesDemystified.Core.Children
 		}
 
 		public decimal Wallet { get; private set; }
+
+		public IParent Parent => this.parent;
 	}
 }

@@ -8,28 +8,23 @@ using System.Web.Http;
 namespace DependenciesDemystified.WebApi
 {
 	// Lifted from: http://autofac.readthedocs.org/en/latest/integration/webapi.html
-	public class WebApiApplication : 
+	public class WebApiApplication :
 		HttpApplication
 	{
 		protected void Application_Start()
 		{
 			GlobalConfiguration.Configure(WebApiConfig.Register);
 
+			var configuration = GlobalConfiguration.Configuration;
+
 			var builder = new ContainerBuilder();
-
-			// Get your HttpConfiguration.
-			var config = GlobalConfiguration.Configuration;
-
-			// Register your Web API controllers.
 			builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
 			builder.RegisterModule<CoreModule>();
+			builder.RegisterWebApiFilterProvider(configuration);
 
-			// OPTIONAL: Register the Autofac filter provider.
-			builder.RegisterWebApiFilterProvider(config);
-
-			// Set the dependency resolver to be Autofac.
 			var container = builder.Build();
-			config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+			configuration.DependencyResolver =
+				new AutofacWebApiDependencyResolver(container);
 		}
 	}
 }

@@ -19,6 +19,6 @@ namespace DependenciesDemystified.Core.Parents
 			}
 		}
 
-		public string Name { get { return "Jason"; } }
+		public string Name => "Jason";
 	}
 }

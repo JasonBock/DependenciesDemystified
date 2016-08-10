@@ -4,14 +4,14 @@ using System.Web.Http;
 
 namespace DependenciesDemystified.WebApi.Controllers
 {
-	public sealed class ParentController 
+	public sealed class ParentController
 		: ApiController
 	{
 		private readonly Lazy<IParent> parent;
 
 		public ParentController(Lazy<IParent> parent)
 		{
-			if(parent == null)
+			if (parent == null)
 			{
 				throw new ArgumentNullException(nameof(parent));
 			}
