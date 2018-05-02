@@ -1,0 +1,13 @@
+﻿{
+  "defaultAssembly": "DependenciesDemystified.Core",
+  "components": [
+    {
+      "type": "DependenciesDemystified.Core.Parents.GrandParent",
+      "services": [
+        {
+          "type": "DependenciesDemystified.Core.Parents.IParent"
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,7 @@ using Autofac.Configuration;
 using DependenciesDemystified.Core;
 using DependenciesDemystified.Core.Children;
 using DependenciesDemystified.Core.Parents;
+using Microsoft.Extensions.Configuration;
 using Spackle;
 using System;
 
@@ -10,13 +11,12 @@ namespace DependenciesDemystified.Client
 {
 	class Program
 	{
-		static void Main(string[] args)
-		{
-			//Program.RunHardCodedChild();
-			//Program.RunDependentChild();
-			//Program.RunWithSimpleConfiguration();
+		//Program.RunHardCodedChild();
+		//Program.RunDependentChild();
+		//Program.RunWithSimpleContainer();
+		//Program.RunWithAutofac();
+		static void Main(string[] args) =>
 			Program.RunWithAutofac();
-		}
 
 		private static void RunHardCodedChild()
 		{
@@ -56,9 +56,9 @@ namespace DependenciesDemystified.Client
 			Console.Out.WriteLine($"{nameof(childUsesLiz)} - {childUsesLiz.Wallet}");
 		}
 
-		private static void RunWithSimpleConfiguration()
+		private static void RunWithSimpleContainer()
 		{
-			Console.Out.WriteLine(nameof(Program.RunWithSimpleConfiguration));
+			Console.Out.WriteLine(nameof(Program.RunWithSimpleContainer));
 
 			var container = new SimpleContainer();
 			container.Register<IParent>(c => new JasonAsParent());
@@ -78,9 +78,12 @@ namespace DependenciesDemystified.Client
 		{
 			Console.Out.WriteLine(nameof(Program.RunWithAutofac));
 
+			var config = new ConfigurationBuilder();
+			config.AddJsonFile("autofac.json");
+
 			var builder = new ContainerBuilder();
 			builder.RegisterModule<CoreModule>();
-			builder.RegisterModule(new ConfigurationSettingsReader());
+			//builder.RegisterModule(new ConfigurationModule(config.Build()));
 
 			var container = builder.Build();
 

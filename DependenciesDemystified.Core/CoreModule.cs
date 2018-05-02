@@ -9,12 +9,16 @@ using System.ComponentModel;
 
 namespace DependenciesDemystified.Core
 {
+	public class MyModule : Module { }
+
 	public sealed class CoreModule
 		: Module
 	{
 		protected override void Load(ContainerBuilder builder)
 		{
 			base.Load(builder);
+
+			builder.RegisterModule<MyModule>();
 
 			builder.RegisterType<Logger>().As<ILogger>();
 			builder.RegisterType<SecureRandom>().As<Random>().SingleInstance();

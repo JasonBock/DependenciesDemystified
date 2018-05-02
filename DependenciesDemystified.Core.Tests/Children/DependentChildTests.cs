@@ -1,17 +1,17 @@
 ﻿using Autofac;
 using DependenciesDemystified.Core.Children;
 using DependenciesDemystified.Core.Parents;
-using FluentAssertions;
 using Moq;
-using Xunit;
+using NUnit.Framework;
 
 namespace DependenciesDemystified.Core.Tests.Children
 {
-	public sealed class DependentChildTests
+	[TestFixture]
+	public static class DependentChildTests
 	{
 		// This works, but it creates a container, which is unnecessary.
-		[Fact]
-		public void DemandFundsWithAContainer()
+		[Test]
+		public static void DemandFundsWithAContainer()
 		{
 			var parent = new Mock<IParent>(MockBehavior.Strict);
 			parent.Setup(_ => _.ProduceFunds()).Returns(5);
@@ -25,15 +25,15 @@ namespace DependenciesDemystified.Core.Tests.Children
 				var child = scope.Resolve<IChild>();
 				child.DemandFunds();
 
-				child.Wallet.Should().Be(5);
+				Assert.That(child.Wallet, Is.EqualTo(5));
 			}
 
 			parent.VerifyAll();
 		}
 
 		// This works, and doesn't involve a container (the preferred way).
-		[Fact]
-		public void DemandFundsWithoutAContainer()
+		[Test]
+		public static void DemandFundsWithoutAContainer()
 		{
 			var parent = new Mock<IParent>(MockBehavior.Strict);
 			parent.Setup(_ => _.ProduceFunds()).Returns(5);
@@ -41,7 +41,7 @@ namespace DependenciesDemystified.Core.Tests.Children
 			var child = new DependentChild(parent.Object);
 			child.DemandFunds();
 
-			child.Wallet.Should().Be(5);
+			Assert.That(child.Wallet, Is.EqualTo(5));
 
 			parent.VerifyAll();
 		}
