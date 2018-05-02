@@ -1,9 +1,11 @@
 ﻿using Autofac;
 using Autofac.Configuration;
+using Autofac.Extensions.DependencyInjection;
 using DependenciesDemystified.Core;
 using DependenciesDemystified.Core.Children;
 using DependenciesDemystified.Core.Parents;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Spackle;
 using System;
 
@@ -15,8 +17,9 @@ namespace DependenciesDemystified.Client
 		//Program.RunDependentChild();
 		//Program.RunWithSimpleContainer();
 		//Program.RunWithAutofac();
+		//Program.RunWithCoreIntegration();
 		static void Main(string[] args) =>
-			Program.RunWithAutofac();
+			Program.RunWithCoreIntegration();
 
 		private static void RunHardCodedChild()
 		{
@@ -83,13 +86,38 @@ namespace DependenciesDemystified.Client
 
 			var builder = new ContainerBuilder();
 			builder.RegisterModule<CoreModule>();
-			//builder.RegisterModule(new ConfigurationModule(config.Build()));
+			builder.RegisterModule(new ConfigurationModule(config.Build()));
 
 			var container = builder.Build();
 
 			using (var scope = container.BeginLifetimeScope())
 			{
 				var child = scope.Resolve<IChild>();
+
+				for (var i = 0; i < 100; i++)
+				{
+					child.DemandFunds();
+				}
+
+				Console.Out.WriteLine(child.Wallet);
+				Console.Out.WriteLine(child.Parent.Name);
+			}
+		}
+
+		private static void RunWithCoreIntegration()
+		{
+			var services = new ServiceCollection();
+
+			var builder = new ContainerBuilder();
+			builder.Populate(services);
+			builder.RegisterModule<CoreModule>();
+
+			var container = builder.Build();
+			var provider = new AutofacServiceProvider(container);
+
+			using (var scope = provider.CreateScope())
+			{
+				var child = scope.ServiceProvider.GetService<IChild>();
 
 				for (var i = 0; i < 100; i++)
 				{
