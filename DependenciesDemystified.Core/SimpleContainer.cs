@@ -9,14 +9,10 @@ namespace DependenciesDemystified.Core
 		private readonly Dictionary<Type, Func<SimpleContainer, object>> typeToCreator = 
 			new Dictionary<Type, Func<SimpleContainer, object>>();
 
-		public void Register<T>(Func<SimpleContainer, object> creator)
-		{
-			typeToCreator.Add(typeof(T), creator);
-		}
+		public void Register<T>(Func<SimpleContainer, object> creator) => 
+			this.typeToCreator.Add(typeof(T), creator);
 
-		public T Resolve<T>()
-		{
-			return (T)typeToCreator[typeof(T)](this);
-		}
+		public T Resolve<T>() => 
+			(T)this.typeToCreator[typeof(T)](this);
 	}
 }

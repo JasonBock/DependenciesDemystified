@@ -3,10 +3,7 @@
 	public sealed class GrandParent
 		: IParent
 	{
-		public decimal ProduceFunds()
-		{
-			return 10000M;
-		}
+		public decimal ProduceFunds() => 10000M;
 
 		public string Name => "Jack";
 	}

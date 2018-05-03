@@ -16,30 +16,10 @@ namespace DependenciesDemystified.Core.Children
 		public ComplexDependentChild(IParent parent, Lazy<ILogger> logger,
 			Func<ProductChoices, IProduct> productCreator, Random random)
 		{
-			if(parent == null)
-			{
-				throw new ArgumentNullException(nameof(parent));
-			}
-
-			if (logger == null)
-			{
-				throw new ArgumentNullException(nameof(logger));
-			}
-
-			if (productCreator == null)
-			{
-				throw new ArgumentNullException(nameof(productCreator));
-			}
-
-			if (random == null)
-			{
-				throw new ArgumentNullException(nameof(random));
-			}
-
-			this.parent = parent;
-			this.logger = logger;
-			this.productCreator = productCreator;
-			this.random = random;
+			this.parent = parent ?? throw new ArgumentNullException(nameof(parent));
+			this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
+			this.productCreator = productCreator ?? throw new ArgumentNullException(nameof(productCreator));
+			this.random = random ?? throw new ArgumentNullException(nameof(random));
 		}
 
 		public void DemandFunds()
@@ -55,7 +35,7 @@ namespace DependenciesDemystified.Core.Children
 				this.Wallet += funds;
 
 				var productChoice = (ProductChoices)this.random.Next(0, 3);
-				var product = productCreator(productChoice);
+				var product = this.productCreator(productChoice);
 
 				if(this.Wallet > product.Cost)
 				{

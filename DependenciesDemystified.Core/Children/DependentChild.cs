@@ -8,20 +8,10 @@ namespace DependenciesDemystified.Core.Children
 	{
 		private readonly IParent parent;
 
-		public DependentChild(IParent parent)
-		{
-			if(parent == null)
-			{
-				throw new ArgumentNullException(nameof(parent));
-			}
+		public DependentChild(IParent parent) => 
+			this.parent = parent ?? throw new ArgumentNullException(nameof(parent));
 
-			this.parent = parent;
-		}
-
-		public void DemandFunds()
-		{
-			this.Wallet += this.parent.ProduceFunds();
-		}
+		public void DemandFunds() => this.Wallet += this.parent.ProduceFunds();
 
 		public decimal Wallet { get; private set; }
 
