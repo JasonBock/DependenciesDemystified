@@ -19,7 +19,7 @@ namespace DependenciesDemystified.Client
 		//Program.RunWithAutofac();
 		//Program.RunWithCoreIntegration();
 		static void Main() =>
-			Program.RunWithCoreIntegration();
+			Program.RunWithAutofac();
 
 		private static void RunHardCodedChild()
 		{
