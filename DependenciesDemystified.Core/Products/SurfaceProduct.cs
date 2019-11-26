@@ -3,11 +3,7 @@
 	public sealed class SurfaceProduct
 		: IProduct
 	{
-		public SurfaceProduct()
-		{
-			this.Name = "Surface";
-			this.Cost = 500M;
-		}
+		public SurfaceProduct() => (this.Name, this.Cost) = ("Surface", 500M);
 
 		public decimal Cost { get; }
 		public string Name { get; }

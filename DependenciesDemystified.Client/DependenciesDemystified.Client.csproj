@@ -1,14 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-    <WarningsAsErrors />
+    <Nullable>enable</Nullable>
     <StartupObject>DependenciesDemystified.Client.Program</StartupObject>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Autofac.Configuration" Version="4.0.1" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.2" />
@@ -16,15 +14,12 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\DependenciesDemystified.Core\DependenciesDemystified.Core.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <None Update="autofac.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
 </Project>

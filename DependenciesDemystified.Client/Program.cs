@@ -18,7 +18,7 @@ namespace DependenciesDemystified.Client
 		//Program.RunWithSimpleContainer();
 		//Program.RunWithAutofac();
 		//Program.RunWithCoreIntegration();
-		static void Main(string[] args) =>
+		static void Main() =>
 			Program.RunWithCoreIntegration();
 
 		private static void RunHardCodedChild()
@@ -90,18 +90,16 @@ namespace DependenciesDemystified.Client
 
 			var container = builder.Build();
 
-			using (var scope = container.BeginLifetimeScope())
+			using var scope = container.BeginLifetimeScope();
+			var child = scope.Resolve<IChild>();
+
+			for (var i = 0; i < 100; i++)
 			{
-				var child = scope.Resolve<IChild>();
-
-				for (var i = 0; i < 100; i++)
-				{
-					child.DemandFunds();
-				}
-
-				Console.Out.WriteLine(child.Wallet);
-				Console.Out.WriteLine(child.Parent.Name);
+				child.DemandFunds();
 			}
+
+			Console.Out.WriteLine(child.Wallet);
+			Console.Out.WriteLine(child.Parent.Name);
 		}
 
 		private static void RunWithCoreIntegration()
@@ -115,18 +113,16 @@ namespace DependenciesDemystified.Client
 			var container = builder.Build();
 			var provider = new AutofacServiceProvider(container);
 
-			using (var scope = provider.CreateScope())
+			using var scope = provider.CreateScope();
+			var child = scope.ServiceProvider.GetService<IChild>();
+
+			for (var i = 0; i < 100; i++)
 			{
-				var child = scope.ServiceProvider.GetService<IChild>();
-
-				for (var i = 0; i < 100; i++)
-				{
-					child.DemandFunds();
-				}
-
-				Console.Out.WriteLine(child.Wallet);
-				Console.Out.WriteLine(child.Parent.Name);
+				child.DemandFunds();
 			}
+
+			Console.Out.WriteLine(child.Wallet);
+			Console.Out.WriteLine(child.Parent.Name);
 		}
 	}
 }

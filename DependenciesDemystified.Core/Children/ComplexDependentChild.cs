@@ -9,14 +9,13 @@ namespace DependenciesDemystified.Core.Children
 		: IChild
 	{
 		private readonly Lazy<ILogger> logger;
-		private readonly IParent parent;
 		private readonly Func<ProductChoices, IProduct> productCreator;
 		private readonly Random random;
 
 		public ComplexDependentChild(IParent parent, Lazy<ILogger> logger,
 			Func<ProductChoices, IProduct> productCreator, Random random)
 		{
-			this.parent = parent ?? throw new ArgumentNullException(nameof(parent));
+			this.Parent = parent ?? throw new ArgumentNullException(nameof(parent));
 			this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
 			this.productCreator = productCreator ?? throw new ArgumentNullException(nameof(productCreator));
 			this.random = random ?? throw new ArgumentNullException(nameof(random));
@@ -24,7 +23,7 @@ namespace DependenciesDemystified.Core.Children
 
 		public void DemandFunds()
 		{
-			var funds = this.parent.ProduceFunds();
+			var funds = this.Parent.ProduceFunds();
 
 			if(funds <= 0M)
 			{
@@ -47,6 +46,6 @@ namespace DependenciesDemystified.Core.Children
 
 		public decimal Wallet { get; private set; }
 
-		public IParent Parent => this.parent;
+		public IParent Parent { get; }
 	}
 }

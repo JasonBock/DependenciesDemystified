@@ -9,8 +9,6 @@ using System.ComponentModel;
 
 namespace DependenciesDemystified.Core
 {
-	public class MyModule : Module { }
-
 	public sealed class CoreModule
 		: Module
 	{
@@ -18,40 +16,25 @@ namespace DependenciesDemystified.Core
 		{
 			base.Load(builder);
 
-			builder.RegisterModule<MyModule>();
-
 			builder.RegisterType<Logger>().As<ILogger>();
 			builder.RegisterType<SecureRandom>().As<Random>().SingleInstance();
-			builder.Register<Func<ProductChoices, IProduct>>(c =>
-			{
-				return new Func<ProductChoices, IProduct>(p =>
-				{
-					switch (p)
+			
+			builder.Register(c => new Func<ProductChoices, IProduct>(
+					p => p switch
 					{
-						case ProductChoices.Car:
-							return new TeslaProduct();
-						case ProductChoices.Computer:
-							return new SurfaceProduct();
-						case ProductChoices.GameConsole:
-							return new XboxOneProduct();
-						default:
-							throw new InvalidEnumArgumentException($"The product choice value, {p}, is invalid.");
-					}
+						ProductChoices.Car => new TeslaProduct(),
+						ProductChoices.Computer => new SurfaceProduct(),
+						ProductChoices.GameConsole => new XboxOneProduct(),
+						_ => throw new InvalidEnumArgumentException($"The product choice value, {p}, is invalid.")
+					}));
+			
+			builder.Register<IParent>(c => 
+				c.Resolve<Random>().Next(0, 2) switch
+				{
+					0 => new LizAsParent(c.Resolve<Random>()),
+					_ => new JasonAsParent()
 				});
-			});
-			builder.Register<IParent>(c =>
-			{
-				var random = c.Resolve<Random>();
-
-				if (random.Next(0, 2) == 0)
-				{
-					return new LizAsParent(c.Resolve<Random>());
-				}
-				else
-				{
-					return new JasonAsParent();
-				}
-			});
+				
 			builder.RegisterType<ComplexDependentChild>().As<IChild>();
 		}
 	}

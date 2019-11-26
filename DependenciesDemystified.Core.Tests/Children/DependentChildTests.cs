@@ -6,7 +6,6 @@ using NUnit.Framework;
 
 namespace DependenciesDemystified.Core.Tests.Children
 {
-	[TestFixture]
 	public static class DependentChildTests
 	{
 		// This works, but it creates a container, which is unnecessary.
