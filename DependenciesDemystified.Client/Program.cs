@@ -19,7 +19,7 @@ namespace DependenciesDemystified.Client
 		//Program.RunWithAutofac();
 		//Program.RunWithCoreIntegration();
 		static void Main() =>
-			Program.RunWithAutofac();
+			Program.RunWithServiceCollection();
 
 		private static void RunHardCodedChild()
 		{
@@ -102,6 +102,27 @@ namespace DependenciesDemystified.Client
 			Console.Out.WriteLine(child.Parent.Name);
 		}
 
+		private static void RunWithServiceCollection()
+		{
+			var services = new ServiceCollection();
+			services.AddScoped<IChild, DependentChild>();
+			services.AddScoped<IParent, JasonAsParent>();
+
+			var provider = services.BuildServiceProvider();
+
+			using var scope = provider.CreateScope();
+			var child = scope.ServiceProvider.GetService<IChild>();
+
+			for (var i = 0; i < 100; i++)
+			{
+				child.DemandFunds();
+			}
+
+			Console.Out.WriteLine(child.Wallet);
+			Console.Out.WriteLine(child.Parent.Name);
+		}
+
+		// https://docs.autofac.org/en/latest/integration/aspnetcore.html
 		private static void RunWithCoreIntegration()
 		{
 			var services = new ServiceCollection();
@@ -111,7 +132,7 @@ namespace DependenciesDemystified.Client
 			builder.RegisterModule<CoreModule>();
 
 			var container = builder.Build();
-			var provider = new AutofacServiceProvider(container);
+			var provider = new AutofacServiceProvider(container) as IServiceProvider;
 
 			using var scope = provider.CreateScope();
 			var child = scope.ServiceProvider.GetService<IChild>();
