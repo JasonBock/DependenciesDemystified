@@ -1,19 +1,22 @@
 ﻿using Autofac;
 using Autofac.Configuration;
 using Autofac.Extensions.DependencyInjection;
+using DependenciesDemystified;
 using DependenciesDemystified.Core;
 using DependenciesDemystified.Core.Children;
 using DependenciesDemystified.Core.Parents;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Spackle;
+using StrongInject;
 using System;
 
 //RunHardCodedChild();
 //RunDependentChild();
-RunWithServiceCollection();
+//RunWithServiceCollection();
 //RunWithAutofac();
 //RunWithCoreIntegration();
+RunWithStrongInject();
 
 static void RunHardCodedChild()
 {
@@ -124,4 +127,17 @@ static void RunWithCoreIntegration()
 
 	Console.Out.WriteLine(child.Wallet);
 	Console.Out.WriteLine(child.Parent.Name);
+}
+
+static void RunWithStrongInject()
+{
+	new DependencyContainer().Run(child =>
+	{
+		for (var i = 0; i < 1000; i++)
+		{
+			child.DemandFunds();
+		}
+
+		Console.Out.WriteLine($"{nameof(child)} - {child.Wallet}");
+	});
 }
