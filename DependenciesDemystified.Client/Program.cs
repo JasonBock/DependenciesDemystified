@@ -16,7 +16,7 @@ using System;
 //RunWithServiceCollection();
 //RunWithAutofac();
 //RunWithCoreIntegration();
-RunWithStrongInject();
+//RunWithStrongInject();
 
 static void RunHardCodedChild()
 {
