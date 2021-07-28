@@ -18,23 +18,23 @@ namespace DependenciesDemystified.Core
 
 			builder.RegisterType<Logger>().As<ILogger>();
 			builder.RegisterType<SecureRandom>().As<Random>().SingleInstance();
-			
+
 			builder.Register(c => new Func<ProductChoices, IProduct>(
-					p => p switch
-					{
-						ProductChoices.Car => new TeslaProduct(),
-						ProductChoices.Computer => new SurfaceProduct(),
-						ProductChoices.GameConsole => new XboxOneProduct(),
-						_ => throw new InvalidEnumArgumentException($"The product choice value, {p}, is invalid.")
-					}));
-			
-			builder.Register<IParent>(c => 
-				c.Resolve<Random>().Next(0, 2) switch
+				choice => choice switch
 				{
-					0 => new LizAsParent(c.Resolve<Random>()),
+					ProductChoices.Car => new TeslaProduct(),
+					ProductChoices.Computer => new SurfaceProduct(),
+					ProductChoices.GameConsole => new XboxOneProduct(),
+					_ => throw new InvalidEnumArgumentException($"The product choice value, {choice}, is invalid.")
+				}));
+
+			builder.Register<IParent>(context =>
+				context.Resolve<Random>().Next(0, 2) switch
+				{
+					0 => new LizAsParent(context.Resolve<Random>()),
 					_ => new JasonAsParent()
 				});
-				
+
 			builder.RegisterType<ComplexDependentChild>().As<IChild>();
 		}
 	}
