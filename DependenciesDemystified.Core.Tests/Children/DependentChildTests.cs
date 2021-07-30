@@ -15,9 +15,6 @@ namespace DependenciesDemystified.Core.Tests.Children
 			var parent = Rock.Create<IParent>();
 			parent.Methods().ProduceFunds().Returns(5);
 
-			//var parent = new Mock<IParent>(MockBehavior.Strict);
-			//parent.Setup(_ => _.ProduceFunds()).Returns(5);
-
 			var container = new ContainerBuilder();
 			container.RegisterInstance(parent.Instance()).As<IParent>();
 			container.RegisterType<DependentChild>().As<IChild>();
