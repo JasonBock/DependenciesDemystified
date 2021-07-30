@@ -1,6 +1,6 @@
-﻿using Autofac;
-using DependenciesDemystified.Core.Children;
+﻿using DependenciesDemystified.Core.Children;
 using DependenciesDemystified.Core.Parents;
+using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using Rocks;
 
@@ -15,14 +15,16 @@ namespace DependenciesDemystified.Core.Tests.Children
 			var parent = Rock.Create<IParent>();
 			parent.Methods().ProduceFunds().Returns(5);
 
-			var container = new ContainerBuilder();
-			container.RegisterInstance(parent.Instance()).As<IParent>();
-			container.RegisterType<DependentChild>().As<IChild>();
+			var container = new ServiceCollection();
+			container.AddTransient<IChild, DependentChild>();
+			container.AddSingleton(parent.Instance());
 
-			using (var scope = container.Build().BeginLifetimeScope())
+			var provider = container.BuildServiceProvider();
+
+			using (var scope = provider.CreateScope())
 			{
-				var child = scope.Resolve<IChild>();
-				child.DemandFunds();
+				var child = scope.ServiceProvider.GetService<IChild>();
+				child!.DemandFunds();
 
 				Assert.That(child.Wallet, Is.EqualTo(5));
 			}
