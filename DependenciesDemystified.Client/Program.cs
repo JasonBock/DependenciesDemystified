@@ -11,11 +11,11 @@ using Spackle;
 using StrongInject;
 using System;
 
-RunHardCodedChild();
+//RunHardCodedChild();
 //RunDependentChild();
 //RunWithServiceCollection();
 //RunWithAutofac();
-//RunWithCoreIntegration();
+RunWithCoreIntegration();
 //RunWithStrongInject();
 
 static void RunHardCodedChild()

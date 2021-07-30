@@ -1,8 +1,8 @@
 ﻿using Autofac;
 using DependenciesDemystified.Core.Children;
 using DependenciesDemystified.Core.Parents;
-using Moq;
 using NUnit.Framework;
+using Rocks;
 
 namespace DependenciesDemystified.Core.Tests.Children
 {
@@ -12,11 +12,14 @@ namespace DependenciesDemystified.Core.Tests.Children
 		[Test]
 		public static void DemandFundsWithAContainer()
 		{
-			var parent = new Mock<IParent>(MockBehavior.Strict);
-			parent.Setup(_ => _.ProduceFunds()).Returns(5);
+			var parent = Rock.Create<IParent>();
+			parent.Methods().ProduceFunds().Returns(5);
+
+			//var parent = new Mock<IParent>(MockBehavior.Strict);
+			//parent.Setup(_ => _.ProduceFunds()).Returns(5);
 
 			var container = new ContainerBuilder();
-			container.RegisterInstance(parent.Object).As<IParent>();
+			container.RegisterInstance(parent.Instance()).As<IParent>();
 			container.RegisterType<DependentChild>().As<IChild>();
 
 			using (var scope = container.Build().BeginLifetimeScope())
@@ -27,22 +30,22 @@ namespace DependenciesDemystified.Core.Tests.Children
 				Assert.That(child.Wallet, Is.EqualTo(5));
 			}
 
-			parent.VerifyAll();
+			parent.Verify();
 		}
 
 		// This works, and doesn't involve a container (the preferred way).
 		[Test]
 		public static void DemandFundsWithoutAContainer()
 		{
-			var parent = new Mock<IParent>(MockBehavior.Strict);
-			parent.Setup(_ => _.ProduceFunds()).Returns(5);
+			var parent = Rock.Create<IParent>();
+			parent.Methods().ProduceFunds().Returns(5);
 
-			var child = new DependentChild(parent.Object);
+			var child = new DependentChild(parent.Instance());
 			child.DemandFunds();
 
 			Assert.That(child.Wallet, Is.EqualTo(5));
 
-			parent.VerifyAll();
+			parent.Verify();
 		}
 	}
 }
