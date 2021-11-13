@@ -1,13 +1,12 @@
 ﻿using DependenciesDemystified.Core.Parents;
 
-namespace DependenciesDemystified.Core.Children
+namespace DependenciesDemystified.Core.Children;
+
+public interface IChild
 {
-	public interface IChild
-	{
-		void DemandFunds();
+	void DemandFunds();
 
-		decimal Wallet { get; }
+	decimal Wallet { get; }
 
-		IParent Parent { get; }
-	}
+	IParent Parent { get; }
 }

@@ -1,8 +1,7 @@
-﻿namespace DependenciesDemystified.Core.Parents
+﻿namespace DependenciesDemystified.Core.Parents;
+
+public interface IParent
 {
-	public interface IParent
-	{
-		decimal ProduceFunds();
-		string Name { get; }
-	}
+	decimal ProduceFunds();
+	string Name { get; }
 }

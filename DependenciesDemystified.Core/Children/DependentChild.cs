@@ -1,17 +1,16 @@
 ﻿using DependenciesDemystified.Core.Parents;
 
-namespace DependenciesDemystified.Core.Children
+namespace DependenciesDemystified.Core.Children;
+
+public sealed class DependentChild
+	: IChild
 {
-   public sealed class DependentChild
-		: IChild
-	{
-		public DependentChild(IParent parent) => 
-			this.Parent = parent ?? throw new ArgumentNullException(nameof(parent));
+	public DependentChild(IParent parent) =>
+		this.Parent = parent ?? throw new ArgumentNullException(nameof(parent));
 
-		public void DemandFunds() => this.Wallet += this.Parent.ProduceFunds();
+	public void DemandFunds() => this.Wallet += this.Parent.ProduceFunds();
 
-		public decimal Wallet { get; private set; }
+	public decimal Wallet { get; private set; }
 
-		public IParent Parent { get; }
-	}
+	public IParent Parent { get; }
 }

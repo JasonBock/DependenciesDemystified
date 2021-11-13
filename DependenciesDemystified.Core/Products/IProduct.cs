@@ -1,8 +1,7 @@
-﻿namespace DependenciesDemystified.Core.Products
+﻿namespace DependenciesDemystified.Core.Products;
+
+public interface IProduct
 {
-	public interface IProduct
-	{
-		decimal Cost { get; }
-		string Name { get; }
-	}
+	decimal Cost { get; }
+	string Name { get; }
 }

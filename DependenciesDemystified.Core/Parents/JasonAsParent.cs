@@ -1,15 +1,14 @@
 ﻿using Spackle;
 
-namespace DependenciesDemystified.Core.Parents
+namespace DependenciesDemystified.Core.Parents;
+
+public sealed class JasonAsParent
+	: IParent
 {
-	public sealed class JasonAsParent
-		: IParent
-	{
-		private readonly SecureRandom random = new();
+	private readonly SecureRandom random = new();
 
-		public decimal ProduceFunds() =>
-			this.random.Next(0, 2) == 0 ? 1000M : 0M;
+	public decimal ProduceFunds() =>
+		this.random.Next(0, 2) == 0 ? 1000M : 0M;
 
-		public string Name => "Jason";
-	}
+	public string Name => "Jason";
 }

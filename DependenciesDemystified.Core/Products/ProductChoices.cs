@@ -1,7 +1,6 @@
-﻿namespace DependenciesDemystified.Core.Products
+﻿namespace DependenciesDemystified.Core.Products;
+
+public enum ProductChoices
 {
-	public enum ProductChoices
-	{
-		Car, Computer, GameConsole
-	}
+	Car, Computer, GameConsole
 }
