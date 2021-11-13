@@ -9,14 +9,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Spackle;
 using StrongInject;
-using System;
 
 //RunHardCodedChild();
 //RunDependentChild();
 //RunWithServiceCollection();
 //RunWithAutofac();
-RunWithCoreIntegration();
-//RunWithStrongInject();
+//RunWithCoreIntegration();
+RunWithStrongInject();
 
 static void RunHardCodedChild()
 {
@@ -142,7 +141,8 @@ static void RunWithStrongInject()
 	Console.Out.WriteLine(nameof(RunWithStrongInject));
 	Console.Out.WriteLine();
 
-	new DependencyContainer().Run(child =>
+	using var container = new DependencyContainer();
+	container.Run(child =>
 	{
 		for (var i = 0; i < 1000; i++)
 		{

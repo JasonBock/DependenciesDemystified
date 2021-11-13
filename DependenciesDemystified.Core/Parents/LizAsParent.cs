@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Spackle;
 
 namespace DependenciesDemystified.Core.Parents
 {
-	public sealed class LizAsParent
+   public sealed class LizAsParent
 		: IParent
 	{
-		private readonly Random random;
+		private readonly SecureRandom random;
 
-		public LizAsParent(Random random) => 
+		public LizAsParent(SecureRandom random) => 
 			this.random = random ?? throw new ArgumentNullException(nameof(random));
 
 		public decimal ProduceFunds() => 

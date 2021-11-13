@@ -1,9 +1,8 @@
 ﻿using DependenciesDemystified.Core.Parents;
-using System;
 
 namespace DependenciesDemystified.Core.Children
 {
-	public sealed class DependentChild
+   public sealed class DependentChild
 		: IChild
 	{
 		public DependentChild(IParent parent) => 

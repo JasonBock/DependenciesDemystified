@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29519.87
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependenciesDemystified.Core", "DependenciesDemystified.Core\DependenciesDemystified.Core.csproj", "{F8D92439-B157-4175-B5E5-64F088D5ED74}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependenciesDemystified.Core.Tests", "DependenciesDemystified.Core.Tests\DependenciesDemystified.Core.Tests.csproj", "{BED65CC1-E0A7-4DAC-9812-AB210A66B1BC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependenciesDemystified.Client", "DependenciesDemystified.Client\DependenciesDemystified.Client.csproj", "{76F2CE39-74B1-4CD3-A461-02D29F80ADB5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7C069686-3C78-41B1-BF92-5C02A69C0C73}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

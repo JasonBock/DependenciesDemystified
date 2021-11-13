@@ -6,6 +6,6 @@ namespace DependenciesDemystified
 {
 	[Register(typeof(DependentChild), typeof(IChild))]
 	[Register(typeof(JasonAsParent), typeof(IParent))]
-	public partial class DependencyContainer 
+	public sealed partial class DependencyContainer 
 		: IContainer<IChild> { }
 }

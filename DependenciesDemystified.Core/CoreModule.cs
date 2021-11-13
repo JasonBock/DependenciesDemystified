@@ -4,12 +4,11 @@ using DependenciesDemystified.Core.Logging;
 using DependenciesDemystified.Core.Parents;
 using DependenciesDemystified.Core.Products;
 using Spackle;
-using System;
 using System.ComponentModel;
 
 namespace DependenciesDemystified.Core
 {
-	public sealed class CoreModule
+   public sealed class CoreModule
 		: Module
 	{
 		protected override void Load(ContainerBuilder builder)
@@ -17,7 +16,7 @@ namespace DependenciesDemystified.Core
 			base.Load(builder);
 
 			builder.RegisterType<Logger>().As<ILogger>();
-			builder.RegisterType<SecureRandom>().As<Random>().SingleInstance();
+			builder.RegisterType<SecureRandom>().As<SecureRandom>().SingleInstance();
 
 			builder.Register(c => new Func<ProductChoices, IProduct>(
 				choice => choice switch
@@ -29,9 +28,9 @@ namespace DependenciesDemystified.Core
 				}));
 
 			builder.Register<IParent>(context =>
-				context.Resolve<Random>().Next(0, 2) switch
+				context.Resolve<SecureRandom>().Next(0, 2) switch
 				{
-					0 => new LizAsParent(context.Resolve<Random>()),
+					0 => new LizAsParent(context.Resolve<SecureRandom>()),
 					_ => new JasonAsParent()
 				});
 

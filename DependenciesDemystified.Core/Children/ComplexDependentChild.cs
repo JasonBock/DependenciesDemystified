@@ -1,7 +1,7 @@
 ﻿using DependenciesDemystified.Core.Logging;
 using DependenciesDemystified.Core.Parents;
 using DependenciesDemystified.Core.Products;
-using System;
+using Spackle;
 
 namespace DependenciesDemystified.Core.Children
 {
@@ -10,10 +10,10 @@ namespace DependenciesDemystified.Core.Children
 	{
 		private readonly Lazy<ILogger> logger;
 		private readonly Func<ProductChoices, IProduct> productCreator;
-		private readonly Random random;
+		private readonly SecureRandom random;
 
 		public ComplexDependentChild(IParent parent, Lazy<ILogger> logger,
-			Func<ProductChoices, IProduct> productCreator, Random random)
+			Func<ProductChoices, IProduct> productCreator, SecureRandom random)
 		{
 			this.Parent = parent ?? throw new ArgumentNullException(nameof(parent));
 			this.logger = logger ?? throw new ArgumentNullException(nameof(logger));

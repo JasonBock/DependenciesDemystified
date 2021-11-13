@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace DependenciesDemystified.Core.Logging
+﻿namespace DependenciesDemystified.Core.Logging
 {
-	public sealed class Logger
+   public sealed class Logger
 		: ILogger, IDisposable
 	{
 		public void Log(string message) => Console.Out.WriteLine($"Logger: {message}");
