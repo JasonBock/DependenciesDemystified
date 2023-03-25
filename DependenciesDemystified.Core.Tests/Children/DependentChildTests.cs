@@ -46,4 +46,16 @@ public static class DependentChildTests
 
 		parent.Verify();
 	}
+
+	[Test]
+	public static void VerifyContainerContents()
+	{
+		// TODO: Show a test to test ServiceCollection setup
+	}
+
+	[Test]
+	public static void VerifyProviderContents()
+	{
+		// TODO: Show a test to test an IServiceProvider instance
+	}
 }

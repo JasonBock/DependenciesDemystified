@@ -1,0 +1,20 @@
+<Project>
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageVersion Include="Autofac" />
+		<PackageVersion Include="Autofac.Configuration" />
+		<PackageVersion Include="Autofac.Extensions.DependencyInjection" />
+		<PackageVersion Include="Microsoft.Extensions.Configuration" />
+		<PackageVersion Include="Microsoft.Extensions.Configuration.Json" />
+		<PackageVersion Include="Microsoft.Extensions.DependencyInjection" />
+		<PackageVersion Include="Microsoft.NET.Test.Sdk" />
+		<PackageVersion Include="NUnit" />
+		<PackageVersion Include="NUnit3TestAdapter" />
+		<PackageVersion Include="NUnit.Analyzers" />
+		<PackageVersion Include="Rocks" />
+		<PackageVersion Include="Spackle" />
+		<PackageVersion Include="StrongInject" />
+	</ItemGroup>
+</Project>

@@ -11,11 +11,6 @@ using Spackle;
 using StrongInject;
 
 //RunHardCodedChild();
-//RunDependentChild();
-//RunWithServiceCollection();
-//RunWithAutofac();
-//RunWithCoreIntegration();
-RunWithStrongInject();
 
 static void RunHardCodedChild()
 {
@@ -33,6 +28,8 @@ static void RunHardCodedChild()
 	Console.Out.WriteLine($"Wallet is {child.Wallet:C}");
 }
 
+//RunDependentChild();
+
 static void RunDependentChild()
 {
 	Console.Out.WriteLine(nameof(RunDependentChild));
@@ -49,7 +46,8 @@ static void RunDependentChild()
 	Console.Out.WriteLine($"Wallet is {childUsesJason.Wallet:C}");
 	Console.Out.WriteLine();
 
-	var childUsesLiz = new DependentChild(new LizAsParent(new SecureRandom()));
+	using var random = new SecureRandom();
+	var childUsesLiz = new DependentChild(new LizAsParent(random));
 
 	for (var i = 0; i < 1000; i++)
 	{
@@ -60,6 +58,8 @@ static void RunDependentChild()
 	Console.Out.WriteLine($"Wallet is {childUsesLiz.Wallet:C}");
 }
 
+//RunWithServiceCollection();
+
 static void RunWithServiceCollection()
 {
 	Console.Out.WriteLine(nameof(RunWithServiceCollection));
@@ -69,7 +69,7 @@ static void RunWithServiceCollection()
 	services.AddScoped<IChild, DependentChild>();
 	services.AddScoped<IParent, JasonAsParent>();
 
-	var provider = services.BuildServiceProvider();
+	using var provider = services.BuildServiceProvider();
 
 	using var scope = provider.CreateScope();
 	var child = scope.ServiceProvider.GetService<IChild>()!;
@@ -83,13 +83,15 @@ static void RunWithServiceCollection()
 	Console.Out.WriteLine($"Wallet is {child.Wallet:C}");
 }
 
+//RunWithAutofac();
+
 static void RunWithAutofac()
 {
 	Console.Out.WriteLine(nameof(RunWithAutofac));
 	Console.Out.WriteLine();
 
 	var configuration = new ConfigurationBuilder();
-	configuration.AddJsonFile("autofac.json");
+	//configuration.AddJsonFile("autofac.json");
 
 	var builder = new ContainerBuilder();
 	builder.RegisterModule<CoreModule>();
@@ -109,10 +111,12 @@ static void RunWithAutofac()
 	Console.Out.WriteLine($"Wallet is {child.Wallet:C}");
 }
 
+//RunWithIntegration();
+
 // https://docs.autofac.org/en/latest/integration/aspnetcore.html
-static void RunWithCoreIntegration()
+static void RunWithIntegration()
 {
-	Console.Out.WriteLine(nameof(RunWithCoreIntegration));
+	Console.Out.WriteLine(nameof(RunWithIntegration));
 	Console.Out.WriteLine();
 
 	var services = new ServiceCollection();
@@ -135,6 +139,33 @@ static void RunWithCoreIntegration()
 	Console.Out.WriteLine($"Parent's name is {child.Parent.Name}");
 	Console.Out.WriteLine($"Wallet is {child.Wallet:C}");
 }
+
+//RunMinimalApi();
+
+static void RunMinimalApi()
+{
+	Console.Out.WriteLine(nameof(RunMinimalApi));
+	Console.Out.WriteLine();
+
+	// TODO: Create a simple minimal API
+	// that sets up a container
+	// along with a GET that gets a child to demand funds()
+}
+
+//RunTestingApproaches();
+
+static void RunTestingApproaches()
+{
+	Console.Out.WriteLine(nameof(RunTestingApproaches));
+	Console.Out.WriteLine();
+
+	// TODO: Show how you can test a 
+	// ServiceCollection directly, or 
+	// use IServiceProviderIsService
+	// (https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.iserviceproviderisservice)
+}
+
+RunWithStrongInject();
 
 static void RunWithStrongInject()
 {

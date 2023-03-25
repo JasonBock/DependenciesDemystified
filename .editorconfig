@@ -37,6 +37,9 @@ dotnet_diagnostic.CA1014.severity = none
 # CA1812: Program is an internal class...
 dotnet_diagnostic.CA1812.severity = none
 
+# CA1852: Type 'Program' can be sealed...
+dotnet_diagnostic.CA1852.severity = none
+
 dotnet_diagnostics.NU1603.severity = none
 
 # NUnit analyzers
