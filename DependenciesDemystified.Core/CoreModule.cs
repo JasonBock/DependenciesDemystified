@@ -21,7 +21,7 @@ public sealed class CoreModule
 		builder.Register(c => new Func<ProductChoices, IProduct>(
 			choice => choice switch
 			{
-				ProductChoices.Car => new TeslaProduct(),
+				ProductChoices.Car => new DodgeViperProduct(),
 				ProductChoices.Computer => new SurfaceProduct(),
 				ProductChoices.GameConsole => new XboxOneProduct(),
 				_ => throw new InvalidEnumArgumentException($"The product choice value, {choice}, is invalid.")
