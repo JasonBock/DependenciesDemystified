@@ -70,7 +70,6 @@ static void RunWithServiceCollection()
 	services.AddScoped<IParent, JasonAsParent>();
 
 	using var provider = services.BuildServiceProvider();
-
 	using var scope = provider.CreateScope();
 	var child = scope.ServiceProvider.GetService<IChild>()!;
 

@@ -50,12 +50,11 @@ public static class DependentChildTests
 	[Test]
 	public static void VerifyContainerContents()
 	{
-		// TODO: Show a test to test ServiceCollection setup
-	}
+		var container = new ServiceCollection();
+		container.AddTransient<IChild, DependentChild>();
 
-	[Test]
-	public static void VerifyProviderContents()
-	{
-		// TODO: Show a test to test an IServiceProvider instance
+		Assert.That(() => container.Single(descriptor =>
+			descriptor.Lifetime == ServiceLifetime.Transient && descriptor.ServiceType == typeof(IChild) &&
+			descriptor.ImplementationType == typeof(DependentChild)), Throws.Nothing);
 	}
 }
