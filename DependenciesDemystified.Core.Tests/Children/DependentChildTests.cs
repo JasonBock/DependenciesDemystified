@@ -57,4 +57,20 @@ public static class DependentChildTests
 			descriptor.Lifetime == ServiceLifetime.Transient && descriptor.ServiceType == typeof(IChild) &&
 			descriptor.ImplementationType == typeof(DependentChild)), Throws.Nothing);
 	}
+
+	[Test]
+	public static void VerifyProviderContents()
+	{
+		var container = new ServiceCollection();
+		container.AddTransient<IChild, DependentChild>();
+
+		var provider = container.BuildServiceProvider();
+		var isService = provider.GetService<IServiceProviderIsService>()!;
+
+		Assert.Multiple(() =>
+		{
+			Assert.That(isService.IsService(typeof(IChild)), Is.True);
+			Assert.That(isService.IsService(typeof(IParent)), Is.False);
+		});
+	}
 }

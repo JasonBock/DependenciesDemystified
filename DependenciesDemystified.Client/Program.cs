@@ -8,7 +8,6 @@ using DependenciesDemystified.Core.Parents;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Spackle;
-using StrongInject;
 
 //RunHardCodedChild();
 
@@ -137,31 +136,6 @@ static void RunWithIntegration()
 
 	Console.Out.WriteLine($"Parent's name is {child.Parent.Name}");
 	Console.Out.WriteLine($"Wallet is {child.Wallet:C}");
-}
-
-//RunMinimalApi();
-
-static void RunMinimalApi()
-{
-	Console.Out.WriteLine(nameof(RunMinimalApi));
-	Console.Out.WriteLine();
-
-	// TODO: Create a simple minimal API
-	// that sets up a container
-	// along with a GET that gets a child to demand funds()
-}
-
-//RunTestingApproaches();
-
-static void RunTestingApproaches()
-{
-	Console.Out.WriteLine(nameof(RunTestingApproaches));
-	Console.Out.WriteLine();
-
-	// TODO: Show how you can test a 
-	// ServiceCollection directly, or 
-	// use IServiceProviderIsService
-	// (https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection.iserviceproviderisservice)
 }
 
 RunWithStrongInject();
