@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Spackle;
 
-//RunHardCodedChild();
+RunHardCodedChild();
 
 static void RunHardCodedChild()
 {
@@ -34,9 +34,10 @@ static void RunDependentChild()
 	Console.Out.WriteLine(nameof(RunDependentChild));
 	Console.Out.WriteLine();
 
-	var childUsesJason = new DependentChild(new JasonAsParent());
+	using var jasonParent = new JasonAsParent();
+	var childUsesJason = new DependentChild(jasonParent);
 
-	for (var i = 0; i < 1000; i++)
+   for (var i = 0; i < 1000; i++)
 	{
 		childUsesJason.DemandFunds();
 	}
@@ -89,7 +90,7 @@ static void RunWithAutofac()
 	Console.Out.WriteLine();
 
 	var configuration = new ConfigurationBuilder();
-	//configuration.AddJsonFile("autofac.json");
+	configuration.AddJsonFile("autofac.json");
 
 	var builder = new ContainerBuilder();
 	builder.RegisterModule<CoreModule>();
@@ -111,7 +112,7 @@ static void RunWithAutofac()
 
 //RunWithIntegration();
 
-// https://docs.autofac.org/en/latest/integration/aspnetcore.html
+// https:docs.autofac.org/en/latest/integration/aspnetcore.html
 static void RunWithIntegration()
 {
 	Console.Out.WriteLine(nameof(RunWithIntegration));
@@ -124,7 +125,8 @@ static void RunWithIntegration()
 	builder.RegisterModule<CoreModule>();
 
 	var container = builder.Build();
-	var provider = new AutofacServiceProvider(container) as IServiceProvider;
+	using var autofaceProvider = new AutofacServiceProvider(container);
+	var provider = autofaceProvider as IServiceProvider;
 
 	using var scope = provider.CreateScope();
 	var child = scope.ServiceProvider.GetService<IChild>()!;
@@ -138,7 +140,7 @@ static void RunWithIntegration()
 	Console.Out.WriteLine($"Wallet is {child.Wallet:C}");
 }
 
-RunWithStrongInject();
+//RunWithStrongInject();
 
 static void RunWithStrongInject()
 {
